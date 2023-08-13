@@ -1,0 +1,46 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('articles') }}
+{% endblock %}
+
+{% block body %}
+    <main>
+        <header>
+            <nav>
+                <img src={{ asset('images/Jaji_pager.png') }} alt="logo">
+                <ul>
+                    <li><a href="{{ path('front_app_default') }}">Accueil</a></li>
+                    <li><a href="{{ path('front_app_default') }}">Nos engagements</a></li>
+                </ul>
+            </nav>
+            <div class="title">
+                <img src={{ asset('images/logo_jaji.png') }} alt="logo">
+                <h1>avec ma mutuelle</h1>
+            </div>
+            <p>Découvrez nos astuces et conseils autour du monde de la mutuelle.</p>
+        </header>
+        <section>
+            <h1>Jaji pour...</h1>
+            <p>“Jajji pour” notre serie de conseils pour mieux appréhender votre hospitalisation</p>
+            <div>
+                {% for content in contents %}
+                    <a href="{{ path("front_app_content_show", {"slug": content.slug }) }}">
+                        <article>
+                            <div>
+                                <img src="{{ asset('uploads/images/' ~ content.imageSource) }}" alt="{{ content.slug }}" class="">
+                                <div>
+                                    <p>{{ content.title }}</p>
+                                    <span>{{ content.typeInteger }}</span>
+                                </div>
+                            </div>
+                        </article>
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

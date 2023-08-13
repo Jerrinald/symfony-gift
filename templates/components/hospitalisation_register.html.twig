@@ -1,0 +1,93 @@
+<main {{ attributes }}>
+
+    <div id="loader-wrapper" data-loading>
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="logo-container">
+            <img src={{ asset('images/logo_jaji.png') }} alt="jaji" class="loader-logo">
+        </div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    {{ component('sidebar', { step: step }) }}
+
+    <section class="main">
+        <div>
+            <div>
+                <h1>Patient</h1>
+                <p>Description</p>
+            </div>
+            <form>
+                <div>
+                    <label for="firstname">Prénom</label>
+                    <input type="text" name="firstname" id="firstname" value="{{ app.user.firstname }}">
+                </div>
+                <div>
+                    <label for="lastname">Nom</label>
+                    <input type="text" name="lastname" id="lastname" value="{{ app.user.lastname }}">
+                </div>
+                <div>
+                    <label for="born">Date de naissance</label>
+                    <input type="date" id="born" name="born"
+                           value="{{ app.user.born }}"
+                    >
+                </div>
+                <div>
+                    <label for="gender">Genre</label>
+                    <select name="gender" id="gender" value="{{ app.user.gender }}">
+                        <option value="">Sélection du genre</option>
+                        <option value="dog">Monsieur</option>
+                        <option value="cat">Madame</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="number">Numéro de téléphone</label>
+                    <input type="text" name="number" id="number" placeholder="+33768462492" value="{{ app.user.number }}">
+                </div>
+            </form>
+
+
+            <div id="choices">
+                {% if step != 1 and step != 4%}
+                    <button
+                        data-action="live#action"
+                        data-action-name="prevStep"
+                        id="prev"
+                    >Retour</button>
+                {% endif %}
+                {% if step != 3 and step != 4%}
+                    <button
+                        data-action="live#action"
+                        data-action-name="nextStep"
+                        id="next"
+                    >Continuer</button>
+                {% elseif step == 3 and step != 4%}
+                    <button
+                        data-action="live#action"
+                        data-action-name="nextStep"
+                        id="next"
+                    >Terminer</button>
+                {% endif %}
+                {% if step == 4 %}
+                    <button
+                        data-action="live#action"
+                        data-action-name="nextStep"
+                        id="prev"
+                    >Ne pas recevoir</button>
+                    <button
+                        data-action="live#action"
+                        data-action-name="prevStep"
+                        id="next"
+                    >Recevoir mes offres</button>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+

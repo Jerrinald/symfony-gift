@@ -1,0 +1,55 @@
+<section class="sidebar"  {{ attributes }}>
+        <article class="{{ step == 1 ? 'active' : step > 1 ? 'pass' : '' }}">
+            <div class="step">
+                <span>
+                    {% if step == 1 %}
+                        1
+                    {% elseif step > 1 %}
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                        </svg>
+                    {% endif %}
+                </span>
+            </div>
+            <div class="description">
+                <p>Patient</p>
+                <span>Description</span>
+            </div>
+        </article>
+        <article class="{{ step == 2 ? 'active' : step > 2 ? 'pass' : '' }}">
+            <div class="step">
+                <span>
+                    {% if step <= 2%}
+                        2
+                    {% elseif step > 2 %}
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                        </svg>
+                    {% endif %}
+                </span>
+            </div>
+            <div class="description">
+                <p>Hospitalisation</p>
+                <span>Description</span>
+            </div>
+        </article>
+        <article class="{{ step == 3 ? 'active' : step > 3 ? 'pass' : '' }}">
+            <div class="step">
+                <span>
+                    {% if step <= 3 %}
+                        3
+                    {% elseif step > 3 %}
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                        </svg>
+                    {% endif %}
+                </span>
+            </div>
+            <div class="description">
+                <p>Pathologie</p>
+                <span>Description</span>
+            </div>
+        </article>
+
+</section>
+

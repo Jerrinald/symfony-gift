@@ -1,0 +1,67 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %} Recommendation contenu lié au travail et à l'âge {% endblock %}
+{% block pageTitle %} Recommendation contenu lié au travail et à l'âge {% endblock %}
+
+{% block body %}
+    <div class="flex md:flex-row flex-col w-full md:items-center md:justify-between flex-nowrap">
+        <div>
+            <h1 class="text-3xl font-bold md:mb-0 mb-4">Recommendations contenu lié au travail et à l'âge</h1>
+        </div>
+
+        <div>
+            <a href="{{ path('back_app_recommendation_job_pathology_new') }}" class="px-2 py-1 rounded-md bg-blue-500 text-sky-100 hover:bg-blue-700">+ Créer une nouvelle recommendation</a>
+        </div>
+    </div>
+
+    <div class="flex flex-col mt-10 w-full mb-10">
+        <div class="flex flex-col">
+            <div class="inline-block w-full overflow-x-auto align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                {% for message in app.flashes('success') %}
+                    <div class="p-3 rounded bg-green-500 text-green-100 mb-4 m-3">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="p-3 rounded bg-red-500 text-red-100 mb-4 m-3">
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+                <table class="min-w-full">
+                    <tr>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Id</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Pathologie</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Contenu</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Métier</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Âge</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Description</th>
+                        <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">Action</th>
+                    </tr>
+                    <tbody class="bg-white">
+                    {% for recommendation_job_pathology in recommendation_job_pathologies %}
+                        <tr>
+                            <td class="px-6 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.id }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.pathologyInteger }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.contentInteger }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.jobInteger }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.age }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">{{ recommendation_job_pathology.description }}</td>
+                            <td class="px-6 py-4 border-b border-gray-200">
+                                <div class="flex">
+                                    <a class="text-blue-600 transition duration-100 hover:text-blue-900 mr-2" href="{{ path('back_app_recommendation_job_pathology_show', {'id': recommendation_job_pathology.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                                    <a class="text-green-600 transition duration-100 hover:text-green-900 mr-2" href="{{ path('back_app_recommendation_job_pathology_edit', {'id': recommendation_job_pathology.id}) }}"><i class="fa-solid fa-pen"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr class="text-center">
+                            <td colspan="7" class="py-4">Aucune donnée</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

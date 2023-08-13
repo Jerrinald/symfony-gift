@@ -1,0 +1,220 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Front{% endblock %}
+
+{% block body %}
+    <main x-data="{step: 1}" x-cloak class="front">
+        <section class="sidebar">
+            <article :class="{'active': step === 1, 'pass': step > 1}">
+                <div class="step">
+                <span x-show="step === 1">1</span>
+                <span x-show="step > 1">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                    </svg>
+                </span>
+                </div>
+                <div class="description">
+                    <p>Patient</p>
+                    <span>Description</span>
+                </div>
+            </article>
+            <article :class="{'active': step === 2, 'pass': step > 2}">
+                <div class="step">
+                <span x-show="step <= 2">2</span>
+                <span x-show="step > 2">
+                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                    </svg>
+                </span>
+                </div>
+                <div class="description">
+                    <p>Hospitalisation</p>
+                    <span>Description</span>
+                </div>
+            </article>
+            <article :class="{'active': step === 3, 'pass': step > 3}">
+                <div class="step">
+                <span x-show="step <= 3">3</span>
+                <span x-show="step > 3"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg" x-show="3">
+                        <path d="M8.38128 0.381282C8.72299 0.0395724 9.27701 0.0395733 9.61872 0.381281C9.96043 0.72299 9.96043 1.27701 9.61872 1.61872L4.11872 7.11872C3.77701 7.46043 3.22299 7.46043 2.88128 7.11872L0.381282 4.61872C0.0395728 4.27701 0.0395728 3.72299 0.381282 3.38128C0.72299 3.03957 1.27701 3.03957 1.61872 3.38128L3.5 5.26256L8.38128 0.381282Z" fill="#5E82B6"/>
+                    </svg>
+                </span>
+                </div>
+                <div class="description">
+                    <p>Pathologie</p>
+                    <span>Description</span>
+                </div>
+            </article>
+        </section>
+
+        <section class="main">
+            {{ form_start(hospitalizationForm) }}
+            <div x-show.transition.in="step === 1">
+                <div>
+                    <h1>Patient</h1>
+                    <p>Description</p>
+                </div>
+                <div class="user">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required" for="user_front_firstname">Prénom</label>
+                        <input value="{{ app.user.firstname }}" disabled="disabled" type="text" id="user_front_firstname" class="mt-1 p-2 block w-full rounded-md border-gray-400 border-[1px] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required" for="user_front_lastname">Nom</label>
+                        <input value="{{ app.user.lastname }}" disabled="disabled" type="text" id="user_front_lastname" class="mt-1 p-2 block w-full rounded-md border-gray-400 border-[1px] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required" for="user_front_gender">Genre</label>
+                        <select id="user_front_gender" disabled="disabled" class="mt-1 p-2 block w-full rounded-md border-gray-400 border-[1px] bg-white shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                            <option {{ app.user.gender == 'MADAME' ? 'selected' : '' }}>MADAME</option>
+                            <option {{ app.user.gender == 'MONSIEUR' ? 'selected' : '' }}>MONSIEUR</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required" for="user_front_born">Date de naissance</label>
+                        <input type="text" disabled id="user_front_born" class="mt-1 p-2 block w-full rounded-md border-gray-400 border-[1px] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ app.user.born|date('d/m/Y') }}" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 required" for="user_front_phone">Numéro de téléphone</label>
+                        <input disabled="disabled" type="text" id="user_front_phone" class="mt-1 p-2 block w-full rounded-md border-gray-400 border-[1px] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="{{ app.user.phone }}" />
+                    </div>
+                </div>
+
+
+                <div id="choices">
+                    <button
+                        type="button"
+                        x-show="step !== 1 && step !== 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Retour"
+                    >Retour</button>
+                    <button
+                        type="button"
+                        x-show="step !== 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Continuer"
+                    >Continuer</button>
+                    <button
+                        type="button"
+                        x-show="step === 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Terminer"
+                    >Terminer</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Ne pas recevoir"
+                    >Ne pas recevoir</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Recevoir mes offres"
+                    >Recevoir mes offres</button>
+                </div>
+            </div>
+
+            <div x-show.transition.in="step === 2">
+                <div>
+                    <h1>Hospitalisation</h1>
+                    <p>Description</p>
+                </div>
+
+                    {{ form_row(hospitalizationForm.entry_date) }}
+                    {{ form_row(hospitalizationForm.end_date) }}
+
+
+                <div id="choices">
+                    <button
+                        type="button"
+                        x-show="step !== 1 && step !== 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Retour"
+                    >Retour</button>
+                    <button
+                        type="button"
+                        x-show="step !== 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Continuer"
+                    >Continuer</button>
+                    <button
+                        type="button"
+                        x-show="step === 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Terminer"
+                    >Terminer</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Ne pas recevoir"
+                    >Ne pas recevoir</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Recevoir mes offres"
+                    >Recevoir mes offres</button>
+                </div>
+            </div>
+            <div x-show.transition.in="step === 3">
+                <div>
+                    <h1>Pathologie</h1>
+                    <p>Description</p>
+                </div>
+
+                {{ form_row(hospitalizationForm.pathology_integer) }}
+
+                <div id="choices">
+                    <button
+                        type="button"
+                        x-show="step !== 1 && step !== 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Retour"
+                    >Retour</button>
+                    <button
+                        type="button"
+                        x-show="step !== 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Continuer"
+                    >Continuer</button>
+                    <button
+                        x-show="step === 3 && step !== 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Terminer"
+                    >{{ button_label|default('Terminer') }}</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step--"
+                        id="prev"
+                        aria-label="Ne pas recevoir"
+                    >Ne pas recevoir</button>
+                    <button
+                        type="button"
+                        x-show="step === 4"
+                        @click="step++"
+                        id="next"
+                        aria-label="Recevoir mes offres"
+                    >Recevoir mes offres</button>
+                </div>
+            </div>
+            {{ form_end(hospitalizationForm) }}
+        </section>
+    </main>
+{% endblock %}
