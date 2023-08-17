@@ -50,7 +50,6 @@ section.main {
     padding-top: 24px;
     gap: 24px;
     height: 100%;
-    background-image: url('../images/wave.png');
     background-position: bottom center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -161,7 +160,6 @@ section.main {
 @media screen and (min-width: 641px) and (max-width: 999px) {
     section.main {
         padding-left: 52px;
-        background-image: url('../images/right_wave.png');
         background-position: top right;
         width: 100%;
         form {
@@ -182,7 +180,6 @@ section.main {
 @media screen and (min-width: 1000px) {
     section.main {
         padding-left: 52px;
-        background-image: url('../images/right_wave.png');
         background-position: top right;
         width: 100%;
 
@@ -191,7 +188,6 @@ section.main {
         }
         form:after {
             content: '';
-            background-image: url('../images/dude.png');
             background-position: top right;
             position: absolute;
             width: 336px;
@@ -203,7 +199,6 @@ section.main {
         }
         &:after {
             content: '';
-            background-image: url('../images/Jaji_pager.png');
             background-position: bottom right;
             position: absolute;
             width: 60px;

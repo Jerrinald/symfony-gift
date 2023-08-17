@@ -1,0 +1,55 @@
+.admin-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+
+    .admin-header {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .admin-links {
+        margin-top: 20px;
+
+        .user-list {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+
+            .user-item {
+                display: table-row;
+
+                .user-header {
+                    font-weight: bold;
+                    background-color: #f2f2f2;
+                }
+
+                .user-info {
+                    display: table-cell;
+                    padding: 8px;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .edit-user-icon {
+                    display: table-cell;
+                    padding: 8px;
+                    text-align: center;
+                    border-bottom: 1px solid #ddd;
+
+                    a {
+                        display: inline-block;
+                        text-decoration: none;
+                        color: #007bff;
+                        transition: color 0.3s ease-in-out;
+                    }
+
+                    a:hover {
+                        color: #0056b3;
+                    }
+                }
+            }
+        }
+    }
+}

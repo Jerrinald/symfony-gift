@@ -50,4 +50,13 @@ class EmailVerifier
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
+
+    /**
+     * @throws VerifyEmailExceptionInterface
+     */
+    public function handleEmailConfirmationPassword(Request $request, UserInterface $user): void
+    {
+        $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
+
+    }
 }

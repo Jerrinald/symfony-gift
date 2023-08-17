@@ -22,10 +22,6 @@ Encore
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
   .addEntry("app", "./assets/app.js")
-  .addStyleEntry('sidebar', './assets/styles/sidebar.scss')
-  .addStyleEntry('login', "./assets/styles/login.scss")
-  .addStyleEntry('article', "./assets/styles/article.scss")
-  .addStyleEntry('articles', "./assets/styles/articles.scss")
   .enableStimulusBridge('./assets/controllers.json')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

@@ -1,0 +1,35 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Gestion utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="admin-page">
+        <h1 class="admin-header">Gestion utilisateurs</h1>
+        <div class="admin-links">
+            <div class="user-list">
+                <div class="user-item user-header">
+                    <div class="user-info">Email</div>
+                    <div class="user-info">Nom</div>
+                    <div class="user-info">Prenom</div>
+                    <div class="user-info">Role</div>
+                    <div class="user-info">Modifier</div>
+                </div>
+                {% for user in users %}
+                    <div class="user-item">
+                        <div class="user-info">{{ user.email }}</div>
+                        <div class="user-info">{{ user.nom }}</div>
+                        <div class="user-info">{{ user.prenom }}</div>
+                        <div class="user-info">
+                            {% if 'ROLE_ADMIN' in user.roles %}
+                                Admin
+                            {% else %}
+                                User
+                            {% endif %}
+                        </div>
+                        <a href="#" class="edit-user-icon">Edit</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

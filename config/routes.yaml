@@ -16,3 +16,7 @@ controllers_security:
 controllers_register:
     resource: ../src/Controller/RegistrationController.php
     type: attribute
+
+controllers_manage_password:
+    resource: ../src/Controller/ManagePasswordController.php
+    type: attribute

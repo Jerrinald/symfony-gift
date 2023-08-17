@@ -1,0 +1,44 @@
+.profile-page {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+
+    .profile-header {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .profile-links {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ul {
+            list-style: none;
+            padding: 0;
+
+            li {
+                margin-bottom: 30px;
+                a {
+                    display: block;
+                    padding: 10px 20px;
+                    text-decoration: none;
+                    border: 2px solid #4272a6;
+                    border-radius: 5px;
+                    color: #4272a6;
+                    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+                    text-align: center;
+
+                    &:hover {
+                        color: #fff;
+                        background-color: #007bff;
+                        border-color: #0056b3;
+                    }
+                }
+            }
+        }
+    }
+}

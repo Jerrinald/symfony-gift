@@ -1,11 +1,6 @@
 {% extends 'base_front.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('login') }}
-{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
 
@@ -16,26 +11,31 @@
 {% endfor %}
     
 <div class="container">
-    <div class="container-form-login">
-        <form method="post">
-            <h2 class="h3 mb-3 font-weight-normal">Connectez-vous</h2>
-        <div>
-            <label for="inputEmail">Email:</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <div class="container-center">
+        <div class="container-form-back">
+            <div class="container-form">
+                <form method="post">
+                    <h2 class="h3 mb-3 font-weight-normal">Connectez-vous</h2>
+                <div>
+                    <label for="inputEmail">Email:</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                </div>
+                <div>
+                    <label for="inputPassword">Password:</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="flex">
+                    <button class="btn btn-lg btn-default" type="submit">Connexion</button>
+                </div>
+                <hr />
+                <div>
+                    <p>Créer un compte <a class="btn-default" href="/register">ICI</a></p>
+                    <p>Un problème avec votre mot de passe ? <a class="btn-default" href="/manage-password">ICI</a></p>
+                </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label for="inputPassword">Password:</label>
-            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-        </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <div class="flex">
-            <button class="btn btn-lg btn-default" type="submit">Connecter</button>
-        </div>
-        <hr />
-        <div>
-            <p>créer un compte <a class="btn-default" href="/register">ICI</a></p>
-        </div>
-        </form>
     </div>
         
             {#

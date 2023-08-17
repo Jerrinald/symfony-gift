@@ -23,18 +23,18 @@
             <h1>Gift Lists Website</h1>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Create List</a></li>
-                    <li><a href="#">Browse Lists</a></li>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Créer une Liste</a></li>
+                    <li><a href="#">Parcourir les Listes</a></li>
                 </ul>
             </nav>
         </div>
         <div class="login-link">
             {% if app.user %}
                 <span>
-                    {{ app.user.userIdentifier }}
+                    <a href="{{ path('front_app_profile_default') }}">{{ app.user.userIdentifier }}</a>
                 </span>
-                <a class="disconnect" href="/logout">Se déconnecter</a>
+                <a class="disconnect" href="/logout">Déconnexion</a>
             {% else %}
                 <a href="/login">Connexion</a>
             {% endif %}

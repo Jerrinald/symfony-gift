@@ -96,7 +96,6 @@ main {
         //height: 100%;
         &:before {
             content: '';
-            background-image: url('../images/buble_blue.png');
             background-position: bottom right;
             position: absolute;
             width: 300px;
@@ -145,7 +144,6 @@ main {
                 margin-left: 16px;
                 &:before {
                     content: '';
-                    background-image: url('../images/Jaji_pager.png');
                     background-position: bottom right;
                     position: absolute;
                     width: 60px;
