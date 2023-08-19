@@ -12,7 +12,8 @@
                     <div class="user-info">Nom</div>
                     <div class="user-info">Prenom</div>
                     <div class="user-info">Role</div>
-                    <div class="user-info">Modifier</div>
+                    <div style="display:none;" class="user-info">Modifier</div>
+                    <div style="display:none;" class="user-info">Validate</div>
                 </div>
                 {% for user in users %}
                     <div class="user-item">
@@ -20,13 +21,16 @@
                         <div class="user-info">{{ user.nom }}</div>
                         <div class="user-info">{{ user.prenom }}</div>
                         <div class="user-info">
-                            {% if 'ROLE_ADMIN' in user.roles %}
-                                Admin
-                            {% else %}
-                                User
-                            {% endif %}
+                            <select id="user-role-{{ user.id }}" disabled="true" data-original-role="{% if 'ROLE_ADMIN' in user.roles %}ROLE_ADMIN{% else %}ROLE_USER{% endif %}">
+                                <option value="ROLE_USER" {% if 'ROLE_ADMIN' not in user.roles %}selected{% endif %}>User</option>
+                                <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}selected{% endif %}>Admin</option>
+                            </select>
                         </div>
-                        <a href="#" class="edit-user-icon">Edit</a>
+                        <a href="#" class="edit-user-icon" data-user-id="{{ user.id }}">Modifier</a>
+                        <div class="user-info">
+                            <a style="display:none;" class="validate-user-icon" data-user-id="{{ user.id }}">Valider</a>
+                            <a style="display:none;" class="cancel-user-icon" data-user-id="{{ user.id }}">Annuler</a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

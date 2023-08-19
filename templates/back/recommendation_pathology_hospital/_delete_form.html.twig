@@ -1,4 +1,0 @@
-<form method="post" action="{{ path('back_app_recommendation_pathology_hospital_delete', {'id': recommendation_pathology_hospital.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ recommendation_pathology_hospital.id) }}">
-    <button class="px-2 py-1 rounded-md bg-red-500 text-white hover:bg-red-700"><i class="fa-solid fa-trash mr-2"></i> Supprimer</button>
-</form>

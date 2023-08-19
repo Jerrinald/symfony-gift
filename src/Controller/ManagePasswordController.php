@@ -94,8 +94,10 @@ class ManagePasswordController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
+        
+        return $this->redirectToRoute('app_reset_password_forgot', array('id' => $id));
 
-        return $this->render('security/manage-credentials/reset-password-forgot.html.twig', ['email' => $user->getEmail(), 'id' => $user->getId()]);
+        //return $this->render('security/manage-credentials/reset-password-forgot.html.twig', ['email' => $user->getEmail(), 'id' => $user->getId()]);
     }
 
 
@@ -125,6 +127,10 @@ class ManagePasswordController extends AbstractController
                 return $this->redirectToRoute('app_login');
             }
         }
+
+        return $this->render('security/manage-credentials/reset-password-forgot.html.twig', ['email' => $user->getEmail(), 'id' => $user->getId()]);
+
+        
     }
 
 }
