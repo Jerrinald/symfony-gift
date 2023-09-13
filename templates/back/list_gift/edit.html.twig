@@ -1,0 +1,23 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Modification liste{% endblock %}
+
+{% block body %}
+
+    <div class="gift-form">
+
+        <div class="container-form edit-form">
+
+            <h1>Modification d'une liste</h1>
+
+            {{ include('back/list_gift/_form.html.twig', {'button_label': 'Update'}) }}
+
+            <div class="container-action">
+
+                <a href="{{ path('back_app_list_gift_index') }}" class="back-button">Retour</a>
+
+                {{ include('back/list_gift/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

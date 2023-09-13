@@ -1,0 +1,32 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Les listes de cadeaux{% endblock %}
+
+{% block body %}
+
+    <div class="gift-recap">
+        <h1>Les détails du cadeau :</h1>
+        <span>Nom :  {{gift.name}} </span>
+        <span>Prix :  {{gift.price}} &euro; </span>
+        <img style="max-width: 40%;" src="{{ vich_uploader_asset(gift, 'imageFile') }}">
+        <a class="display-cancel-gift">Annuler la réservation</a>
+    </div>
+    
+
+    <div class="back-gift-popIn">
+        <div class="cancel-gift-container">
+            <h2>Annulation de réservation</h2>
+
+            <p>Voulez-vous vraiment annuler votre réservation pour le cadeau {{gift.name}} de la liste {{list_gift.title}} ?</p>
+            <div class="cancel-actions">
+                <form method="post" action="{{ path('front_app_gift_delete_booking', {'gift_id': gift.id, 'listGift_id': list_gift.id}) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ gift.id) }}">
+                    <button class="btn delete-button">Oui</button>
+                </form>
+                <button class="btn delete-button close-popIn-cancel-gift">Annuler</button>
+                
+            </div>
+            <a class="close-book close-popIn-cancel-gift">Fermer</a>
+        </div>
+    </div>
+{% endblock %}

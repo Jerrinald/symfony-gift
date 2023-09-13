@@ -1,0 +1,74 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Gestion utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="admin-page">
+        <h1 class="admin-header">Gestion listes</h1>
+        
+        <form action="{{ path('back_app_list_gift_index') }}" class="form-select-gift" method="post">
+            <label class="select-label" for="userSelect">Select un utilisateur:</label>
+            <select id="userSelect" class="select-gift" name="selectedUserId">
+                <option value="" selected disabled>Selectionner un utilisateur</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.nom }} {{ user.prenom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+        
+        {% if userSelec is defined %}
+            <div class="container-list-owner">
+                <p>Listes de {{ userSelec.nom }} {{ userSelec.prenom }}</p>
+            </div>
+        {% endif %}
+
+        {% if userSelec is defined %}
+            <a href="{{ path('back_app_list_gift_new', {'id': userSelec.id}) }}" class="create-button">Créer une nouvelle liste</a>
+        {% endif %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="opacity: 0%;">Couverture</th>
+                    <th>Titre</th>
+                    <th>Theme</th>
+                    <th>Description</th>
+                    <th>Privée</th>
+                    <th>Crée le</th>
+                    <th>Archivé</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if list_gifts is defined %}
+            
+                {% for list_gift in list_gifts %}
+                    <tr>
+                        {% if vich_uploader_asset(list_gift, 'imageFile') is null %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" <img src="{{ asset('images/default/listDefault.jpg') }}"></td>
+                        {% else %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" src="{{ vich_uploader_asset(list_gift, 'imageFile') }}"></td>
+                        {% endif %}
+                        <td>{{ list_gift.title }}</td>
+                        <td>{{ list_gift.theme }}</td>
+                        <td>{{ list_gift.description }}</td>
+                        <td>{{ list_gift.isPrivate ? 'Oui' : 'Non' }}</td>
+                        <td>{{ list_gift.createdAt ? list_gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ list_gift.active ? 'Non' : 'Oui' }}</td>
+                        <td>
+                            <a href="{{ path('back_app_list_gift_show', {'id': list_gift.id}) }}">Détails</a>
+                            <a href="{{ path('back_app_list_gift_edit', {'id': list_gift.id}) }}">Modifier</a>
+                            {{ include('back/list_gift/_archive_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">Aucune liste trouvé</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Creation liste{% endblock %}
+
+{% block body %}
+    <div class="gift-form">
+
+        <div class="container-form">
+            <h1>Créer une nouvelle liste</h1>
+
+            {{ include('front/list_gift/_form.html.twig') }}
+            <div class="container-action">
+
+                <a href="{{ path('front_app_list_gift_index') }}" class="back-button">Retour</a>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

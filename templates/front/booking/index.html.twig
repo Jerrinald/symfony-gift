@@ -1,0 +1,35 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block body %}
+    <div class="gift-list">
+        <h1>Mes reservations</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cadeau</th>
+                    <th>Créé le</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.gift.name }}</td>
+                    <td>{{ booking.createdAt ? booking.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('front_app_booking_show', {'id': booking.id}) }}">Détails</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Aucune réservation trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    
+{% endblock %}

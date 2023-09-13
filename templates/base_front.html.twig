@@ -20,19 +20,23 @@
     </head>
     <header>
         <div class="nav-links">
-            <h1>Gift Lists Website</h1>
+            <a class="titleWebsite" href="{{ path('front_app_default') }}"><h1>Gift Management</h1></a>
             <nav>
                 <ul>
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Créer une Liste</a></li>
-                    <li><a href="#">Parcourir les Listes</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('back_app_default') }}">Admin</a></li>
+                    {% else %}
+                        <li><a href="{{ path('front_app_list_gift_new') }}">Créer une Liste</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('front_app_browse_list_index') }}">Parcourir les Listes</a></li>
+                    
                 </ul>
             </nav>
         </div>
         <div class="login-link">
             {% if app.user %}
                 <span>
-                    <a href="{{ path('front_app_profile_default') }}">{{ app.user.userIdentifier }}</a>
+                    <a class="profile-name" href="{{ path('front_app_profile_default') }}">{{ app.user.userIdentifier }}</a>
                 </span>
                 <a class="disconnect" href="/logout">Déconnexion</a>
             {% else %}

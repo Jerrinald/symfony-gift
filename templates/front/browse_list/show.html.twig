@@ -1,0 +1,126 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}{{ list_gift.title }}{% endblock %}
+
+{% block body %}
+    <div class="list-details">
+
+        {# Check if the user is logged in #}
+        {% set isLoggedIn = app.user is not null %}
+
+        {% set submitted_within_hour = null %}
+        {% if isLoggedIn %}
+            {# Check if the user has successfully submitted the password form within the last hour #}
+            {% set submitted_within_hour = app.session.get('submitted_list_' ~ list_gift.id ~ '_user_' ~ app.user.id) %}
+        {% endif %}
+        
+        {# Display password form if list is private and user has not submitted within the last hour #}
+        {% if list_gift.isPrivate %}
+            {% if submitted_within_hour is null and not access %}
+                <div class="blur-background active">
+                    <div class="centered-form">
+                        {{ form_start(form) }}
+                            {{ form_row(form.password, {label: 'Entrez le mot de passe de cette liste pour y accéder:'}) }}
+                            <button type="submit">Valider</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="book-gift-container">
+            <div class="centered-form">
+                <form method="post" class="book-form" action="{{ path('front_app_browse_list_book', {'gift_id' : 0, 'listGift_id': 0})}}">
+                    <h2 class="h3 mb-3 font-weight-normal">Réserver un cadeau</h2>
+                    <div class="gift-attribute"></div>
+                    <p>Entrez le nom-prénom et email de la personne à qui vous allez offrir le cadeau</p>
+                    <div>
+                        <label for="inputNom">Nom:</label>
+                        <input type="text" name="nom" id="inputNom" required autofocus>
+                    </div>
+                    <div>
+                        <label for="inputPrenom">Prénom:</label>
+                        <input type="text" name="prenom" id="inputPrenom" required autofocus>
+                    </div>
+                    <div>
+                        <label for="inputEmail">Email:</label>
+                        <input type="email" name="email" id="inputEmail" autocomplete="email" required autofocus>
+                    </div>
+                    <div class="flex">
+                        <button class="btn btn-lg btn-default" type="submit">Réserver</button>
+                    </div>
+                    <a href="#" class="close-book">Fermer</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="container-table-list">
+            <h1>Détails de la liste</h1>
+            <table class="table browse-gift">
+                <tbody>
+                    {% if submitted_within_hour is not null or access %}
+                        <tr>
+                            <th>Title</th>
+                            <td>{{ list_gift.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Theme</th>
+                            <td>{{ list_gift.theme }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ list_gift.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Crée le</th>
+                            <td>{{ list_gift.createdAt ? list_gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Cadeaux</th>
+                            <td colspan="9">
+                                <ul>
+                                    {% for gift in list_gift.gift %}
+                                        <li class="gift-item" data-gift-name="{{ gift.name }}" data-gift-id="{{ gift.id }}" data-list-id="{{ list_gift.id }}">
+                                            <div>{{ gift.name }} - {{ gift.price }} €</div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <div class="container-add-actions">
+                <a href="#" class="showGiftAdd">Ajouter un cadeau</a>
+
+                <div class="actions">
+
+                    <a href="{{ path('front_app_browse_list_index') }}" class="back-button">Retour</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="gift-form">
+
+            <div class="container-form addGift">
+                    <h1>Créer un cadeau</h1>
+
+                    <span>Remplissez les informations pour ajouter le cadeau</span>
+                    <a href="#" class="container-display displayOnlyUrl"><span>Cliquez ici pour remplir directement les informations avec l'Url</span></a>
+                    <a href="#" class="container-display displayAllFields"><span>Remplir toutes les informations du cadeau</span></a>
+
+                    <div class="container-form-content allFields">
+                        {{ include('front/list_gift/_form_gift.html.twig') }}
+                    </div>
+                    <div class="container-form-content onlyUrl">
+                        {{ include('front/list_gift/_form_gift_url.html.twig') }}
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+
+{% endblock %}

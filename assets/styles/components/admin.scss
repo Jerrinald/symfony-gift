@@ -1,13 +1,26 @@
 .admin-page {
-    max-width: 800px;
+    max-width: 950px;
     margin: auto;
     padding: 20px;
-    text-align: center;
+
+    .create-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        margin-top: 15px;
+        color: #fff;
+        border: none;
+        float: right;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
 
     .admin-header {
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
+        text-align: center;
     }
 
     .admin-links {
@@ -31,7 +44,7 @@
                     padding: 8px;
                     border-bottom: 1px solid #ddd;
 
-                    .validate-user-icon{
+                    .btn.valid-button{
                         background-color: #007bff;
 
                         &:hover {
@@ -47,10 +60,11 @@
                         }
                     }
 
-                    .validate-user-icon,
+                    .btn.valid-button,
                     .cancel-user-icon {
                         border: none;
                         border-radius: 5px;
+                        font-size: 15px;
                         color: #fff;
                         cursor: pointer;
                         display: inline-block;
@@ -61,6 +75,12 @@
                     }
 
                     
+                }
+
+                .actions{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 .edit-user-icon {
@@ -82,5 +102,37 @@
                 }
             }
         }
+    }
+}
+
+.form-select-gift{
+    margin-bottom: 15px;
+    label{
+        font-weight: 600;
+    }
+
+    .select-gift{
+        width: 90%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    /* Style the submit button */
+    button[type="submit"] {
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    
+    /* Hover effect for the submit button */
+    button[type="submit"]:hover {
+        background-color: #0056b3;
     }
 }

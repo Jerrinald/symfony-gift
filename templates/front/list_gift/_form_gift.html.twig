@@ -1,0 +1,6 @@
+<div class="form-content">
+    {{ form_start(formGift, {'class': 'gift-form'}) }}
+        {{ form_widget(formGift) }}
+        <button class="btn action">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(formGift) }}
+</div>

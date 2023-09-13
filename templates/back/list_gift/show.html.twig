@@ -1,0 +1,73 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}{{ list_gift.title }}{% endblock %}
+
+{% block body %}
+    <div class="gift-details">
+        <h1>ListGift</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th style="opacity: 0%;">Image</th>
+                    {% if vich_uploader_asset(list_gift, 'imageFile') is null %}
+                        <td><img style="max-height: 10%;max-width: 15%;" <img src="{{ asset('images/default/listDefault.jpg') }}"></td>
+                    {% else %}
+                        <td><img style="max-height: 10%;max-width: 25%;" src="{{ vich_uploader_asset(list_gift, 'imageFile') }}"></td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ list_gift.title }}</td>
+                </tr>
+                <tr>
+                    <th>Theme</th>
+                    <td>{{ list_gift.theme }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ list_gift.description }}</td>
+                </tr>
+                <tr>
+                    <th>IsPrivate</th>
+                    <td>{{ list_gift.isPrivate ? 'Yes' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th>Disponible à partir du </th>
+                    <td>{{ list_gift.openingDate ? list_gift.openingDate|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Disponible jusqu'au</th>
+                    <td>{{ list_gift.closingDate ? list_gift.closingDate|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Crée le</th>
+                    <td>{{ list_gift.createdAt ? list_gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Modifié le</th>
+                    <td>{{ list_gift.updatedAt ? list_gift.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Cadeaux</th>
+                    <td colspan="9">
+                        <ul>
+                            {% for gift in list_gift.gift %}
+                                <li>{{ gift.name }} - {{ gift.price }} €</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+
+        <div class="actions">
+
+            <a href="{{ path('back_app_list_gift_index') }}" class="back-button">Retour</a>
+
+            <a href="{{ path('back_app_list_gift_edit', {'id': list_gift.id}) }}" class="edit-button">Modifer</a>
+        </div>
+
+        {{ include('back/list_gift/_delete_form.html.twig') }}
+{% endblock %}

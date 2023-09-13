@@ -1,0 +1,54 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Mes listes{% endblock %}
+
+{% block body %}
+    <div class="gift-list">
+        <h1>Mes listes</h1>
+
+        <a href="{{ path('front_app_list_gift_new') }}" class="create-button">Créer une nouvelle liste</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="opacity: 0%;">Couverture</th>
+                    <th>Titre</th>
+                    <th>Theme</th>
+                    <th>Description</th>
+                    <th>Privée</th>
+                    <th>Crée le</th>
+                    <th>Archivé</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for list_gift in list_gifts %}
+                <tr>
+                    {% if vich_uploader_asset(list_gift, 'imageFile') is null %}
+                        <td style="width: 15%;"><img style="max-width: 100%;" <img src="{{ asset('images/default/listDefault.jpg') }}"></td>
+                    {% else %}
+                        <td style="width: 15%;"><img style="max-width: 100%;" src="{{ vich_uploader_asset(list_gift, 'imageFile') }}"></td>
+                    {% endif %}
+                    <td>{{ list_gift.title }}</td>
+                    <td>{{ list_gift.theme }}</td>
+                    <td>{{ list_gift.description }}</td>
+                    <td>{{ list_gift.isPrivate ? 'Oui' : 'Non' }}</td>
+                    <td>{{ list_gift.createdAt ? list_gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ list_gift.active ? 'Non' : 'Oui' }}</td>
+                    <td>
+                        <a href="{{ path('front_app_list_gift_show', {'id': list_gift.id}) }}">Détails</a>
+                        <a href="{{ path('front_app_list_gift_edit', {'id': list_gift.id}) }}">Modifier</a>
+                        {{ include('front/list_gift/_archive_form.html.twig') }}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Aucune liste trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+{% endblock %}

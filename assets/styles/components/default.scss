@@ -17,11 +17,21 @@ header {
 .nav-links {
     display: flex;
     align-items: center;
+
+    a.titleWebsite{
+        text-decoration: none;
+        color: white;
+        margin-right: 10px;
+    }
 }
 
 .login-link a {
     color: white;
     text-decoration: none;
+}
+
+.login-link a.profile-name {
+    margin-right: 15px;
 }
 
 nav ul {

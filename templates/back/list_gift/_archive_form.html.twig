@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('back_app_list_gift_archive', {'id': list_gift.id}) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ list_gift.id) }}">
+    <button class="btn archive-button">{{ list_gift.active ? 'Archiver' : 'Rendre Actif' }}</button>
+</form>

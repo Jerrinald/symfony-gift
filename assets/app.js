@@ -16,3 +16,5 @@ import './styles/app.scss';
 import './bootstrap';
 
 import './js/admin';
+import './js/browse_list';
+import './js/list';

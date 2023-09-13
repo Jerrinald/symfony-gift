@@ -28,7 +28,7 @@ class EmailService
 
         $sendSmtpEmail = new \Brevo\Client\Model\SendSmtpEmail();
         $sendSmtpEmail['to'] = [['email' => $destinator]];
-        $sendSmtpEmail['sender'] = ['name' => 'Gift Online', 'email' => 'no-reply@gift-management.com'];
+        $sendSmtpEmail['sender'] = ['name' => 'Gift Management', 'email' => 'no-reply@gift-management.com'];
         $sendSmtpEmail['htmlContent'] = $htmlContent;
         $sendSmtpEmail['subject'] = $subject;
         $sendSmtpEmail['headers'] = array('MIME-version'=>'1.0',

@@ -1,0 +1,168 @@
+.blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Apply the blur effect */
+    z-index: 100; /* Place the background above other elements */
+
+    .centered-form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white; /* White background for the form */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    }
+}
+
+.book-gift-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .centered-form {
+        color: white;
+        background-color: #2a2525;
+        left: 50%;
+        padding: 5px 32px 20px;
+        position: absolute;
+        top: 50%;
+        border: thick double #e0eaee;
+        transform: translate(-50%,-50%);
+    
+        form{
+            .gift-attribute{
+                font-weight: bold;
+            }
+
+            div{
+                margin: 20px 0px;
+    
+                input{
+                    width: 100%;
+                }
+            }
+    
+            div.flex{
+                float: right;
+            }
+
+            .close-book{
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                text-decoration: none;
+                color: rgb(93, 147, 228);
+
+                &:hover{
+                    color: rgb(42, 86, 152);
+                }
+            }
+        }
+    }
+}
+
+.container-table-list{
+    margin: auto;
+    margin-top: 0px;
+    .table.browse-gift{ 
+        width:  90%;
+        ul{
+            padding-left: 0px;
+            li.gift-item{
+
+
+                .book-button{
+                    cursor: pointer;
+
+                    a:hover{
+                        color: rgb(10, 27, 121);
+                    }
+                }
+
+            }
+        }
+        
+        
+    }
+
+    .container-add-actions{
+        .actions{
+            margin-top: 25px;
+        }
+    }
+}
+
+.back-gift-popIn {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.5);
+    top: 0;
+    width: 100%;
+
+    .cancel-gift-container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #4a4949;
+        color: #fff;
+        margin: 20px auto auto;
+        max-width: 40%;
+        padding: 20px;
+        text-align: center;
+
+
+        .cancel-actions{
+            align-items: center;
+            display: flex;
+            justify-content: center;
+
+            form{
+                margin: 10px;
+            }
+        }
+
+        .close-book{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: rgb(93, 147, 228);
+
+            &:hover{
+                color: rgb(42, 86, 152);
+            }
+        }
+    }
+}
+
+.gift-recap{
+    margin: auto;
+    max-width: 552px;
+    padding: 30px;
+
+    span{
+        margin: 10px;
+    }
+
+    .display-cancel-gift{
+        cursor: pointer;
+        margin-top: 10px;
+        display: block;
+
+        &:hover{
+            color: rgb(10, 27, 121);
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}{{ gift.name }}{% endblock %}
+
+{% block body %}
+    <div class="gift-details">
+        <h1>Cadeau: {{ gift.name }}</h1>
+        <div class="gift-table-container">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th style="opacity: 0%;">Image</th>
+                        {% if vich_uploader_asset(gift, 'imageFile') is null %}
+                            <td><img style="max-height: 10%;max-width: 35%;" <img src="{{ asset('images/default/giftDefault.jpg') }}"></td>
+                        {% else %}
+                            <td><img style="max-height: 10%;max-width: 35%;" src="{{ vich_uploader_asset(gift, 'imageFile') }}"></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th>Réservé par</th>
+                        <td>{{ gift.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ gift.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ gift.price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lien d'achat</th>
+                        <td>{{ gift.urlPurchase }}</td>
+                    </tr>
+                    <tr>
+                        <th>Crée le</th>
+                        <td>{{ gift.createdAt ? gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Modifié le</th>
+                        <td>{{ gift.updatedAt ? gift.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <a href="{{ path('back_app_gift_index') }}" class="back-button">Retour</a>
+            <a href="{{ path('back_app_gift_edit', {'id': gift.id}) }}" class="edit-show-button" >Modifier</a>
+        </div>
+
+        {{ include('back/gift/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

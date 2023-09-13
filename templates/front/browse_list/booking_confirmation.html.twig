@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="header">
+        <h2 class="title">Confirmation de réservation</h1>
+    </div>
+    <div class="content">
+        <p>Vous avez réservé un cadeau pour {{user.nom}} {{user.prenom}} pour sa liste {{list.title}} sur <strong>Gift Management</strong>:</p>
+        <div class="gift-recap">
+            <p> Les détails du cadeau :</p>
+            <span> {{gift.name}} | </span>
+            <span> {{gift.price}} &euro; | </span>
+            <img style="max-width: 100%;" src="{{ vich_uploader_asset(gift, 'imageFile') }}">
+        </div>
+        <a href="{{ urlCancel }}">Annuler la réservation</a>
+    </div>
+</div>

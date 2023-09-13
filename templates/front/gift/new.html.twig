@@ -1,0 +1,20 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Création nouveau cadeau{% endblock %}
+
+{% block body %}
+    <div class="gift-form">
+
+        <div class="container-form">
+            <h1>Créer un cadeau</h1>
+
+            {{ include('front/gift/_form.html.twig') }}
+
+            <div class="container-action">
+
+                <a href="{{ path('front_app_gift_index') }}" class="back-button">Retour</a>
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}

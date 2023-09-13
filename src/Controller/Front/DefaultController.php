@@ -15,14 +15,7 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'app_default')]
     public function index(Request $request): Response
     {
-
         return $this->render('front/home.html.twig', [
         ]);
-    }
-
-    #[Route('/termine', name: 'app_default_finish')]
-    public function test(Request $request): Response
-    {
-        return $this->render('front/default/finish.html.twig');
     }
 }

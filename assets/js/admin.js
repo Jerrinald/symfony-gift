@@ -6,54 +6,23 @@ document.addEventListener("DOMContentLoaded", function () {
         select.addEventListener('change', (event) => {
             const selectedSelect = event.target; // Get the specific select that triggered the change
             const validateLink = document.querySelector(`.validate-user-icon[data-user-id="${selectedSelect.dataset.userId}"]`);
+            const roleValInput = validateLink.querySelector('input[name="roleVal"]');
             const cancelLink = document.querySelector(`.cancel-user-icon[data-user-id="${selectedSelect.dataset.userId}"]`);
+
             
             if (selectedSelect.value !== originalRole) {
                 validateLink.style.display = 'inline';
-                cancelLink.style.display = 'inline';
             } else {
                 validateLink.style.display = 'none';
-                cancelLink.style.display = 'none';
             }
 
-            validateLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                const userId = event.target.getAttribute('data-user-id');
-                const selectedRole = selectedSelect.value
-        
-                // Send AJAX request to update user role
-                fetch(`/admin/users-manage/edit-level/${userId}/${selectedRole}`, {
-                    method: 'POST',
-                    headers : { 
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Role updated'); // Console log the success message
-                    console.log(data)
-                    // Disable the select element
-                    selectedSelect.disabled = true;
+            const selectedRole = selectedSelect.value;
+            
+            // Set the selected role value in the roleVal input field
+            roleValInput.value = selectedRole;
 
-                    // Hide the "Valider" link
-                    validateLink.style.display = 'none';
-                    cancelLink.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Error in updating', error); // Console log the error message
-                });
-            })
+            console.log(roleValInput);
 
-            cancelLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                
-                // Disable the select element
-                selectedSelect.disabled = true;
-
-                validateLink.style.display = 'none';
-                cancelLink.style.display = 'none';
-            });
         });
     });
     
@@ -64,7 +33,27 @@ document.addEventListener("DOMContentLoaded", function () {
             const userId = link.getAttribute('data-user-id');
             const roleSelect = document.getElementById(`user-role-${userId}`);
             roleSelect.removeAttribute('disabled');
+
+            const validateLink = document.querySelector(`.validate-user-icon[data-user-id="${userId}"]`);
+            const cancelLink = document.querySelector(`.cancel-user-icon[data-user-id="${userId}"]`);
             roleSelect.dataset.userId = userId; // Store the user ID
+
+            console.log(cancelLink);
+
+            cancelLink.style.display = 'inline';
+
+            cancelLink.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                // Reset the select to its original value
+                roleSelect.value = roleSelect.getAttribute('data-original-role');
+                
+                // Disable the select element
+                roleSelect.disabled = true;
+
+                validateLink.style.display = 'none';
+                cancelLink.style.display = 'none';
+            });
         });
     });
   });

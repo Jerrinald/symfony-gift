@@ -1,0 +1,69 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Mes Cadeaux{% endblock %}
+
+{% block body %}
+    <div class="gift-list">
+        <h1>Mes cadeaux</h1>
+
+        <form action="{{ path('front_app_gift_index') }}" class="form-select-gift" method="post">
+            <label for="listSelect">Selectionner une liste:</label>
+            <select id="listSelect" class="select-gift" name="selectedListId">
+                <option value="" selected disabled>Sélectionner une liste</option>
+                {% if listSelected is defined %}
+                        
+                    {% for list_gift in list_gifts %}
+                        <option value="{{ list_gift.id }}" {% if list_gift.id == listSelected.id %}selected{% endif %}>{{ list_gift.title }}</option>
+                    {% endfor %}
+                {% else %}
+                    {% for list_gift in list_gifts %}
+                        <option value="{{ list_gift.id }}">{{ list_gift.title }}</option>
+                    {% endfor %}
+
+                {% endif %}
+            </select>
+            <button type="submit" name="listForm">Submit</button>
+        </form>
+
+        {#<a href="{{ path('front_app_gift_new') }}" class="create-button">Créer un nouveau cadeau</a>#}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="opacity: 0%;">Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Lien achat</th>
+                    <th>Crée le</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if gifts is defined and gifts|length > 0 %}
+                {% for gift in gifts %}
+                    <tr>
+                        {% if vich_uploader_asset(gift, 'imageFile') is null %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" <img src="{{ asset('images/default/giftDefault.jpg') }}"></td>
+                        {% else %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" src="{{ vich_uploader_asset(gift, 'imageFile') }}"></td>
+                        {% endif %}
+                        <td>{{ gift.name }}</td>
+                        <td>{{ gift.price }}</td>
+                        <td>{{ gift.urlPurchase }}</td>
+                        <td>{{ gift.createdAt ? gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('front_app_gift_show', {'id': gift.id}) }}">Détails</a>
+                            <a href="{{ path('front_app_gift_edit', {'id': gift.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucun cadeau trouvé</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

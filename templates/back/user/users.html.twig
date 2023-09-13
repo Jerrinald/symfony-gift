@@ -5,6 +5,7 @@
 {% block body %}
     <div class="admin-page">
         <h1 class="admin-header">Gestion utilisateurs</h1>
+        <a href="{{ path('back_app_register') }}" class="create-button">Créer un nouvel utilisateur</a>
         <div class="admin-links">
             <div class="user-list">
                 <div class="user-item user-header">
@@ -26,9 +27,18 @@
                                 <option value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}selected{% endif %}>Admin</option>
                             </select>
                         </div>
-                        <a href="#" class="edit-user-icon" data-user-id="{{ user.id }}">Modifier</a>
+                        <div class="user-info actions">
+                            <a href="#" class="edit-user-icon" data-user-id="{{ user.id }}">Modifier</a>
+                            {{ include('back/user/_delete_form.html.twig') }}
+                        </div>
                         <div class="user-info">
-                            <a style="display:none;" class="validate-user-icon" data-user-id="{{ user.id }}">Valider</a>
+                            {#<a style="display:none;" class="validate-user-icon" data-user-id="{{ user.id }}">Valider</a>#}
+                            <form style="display:none;"  method="post" class="validate-user-icon" data-user-id="{{ user.id }}" action="{{ path('back_app_users_edit_level', {'id': user.id}) }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token('edit_level' ~ user.id) }}">
+                                <input type="hidden" name="roleVal" value="">
+                                <button class="btn valid-button">Valider</button>
+                            </form>
+
                             <a style="display:none;" class="cancel-user-icon" data-user-id="{{ user.id }}">Annuler</a>
                         </div>
                     </div>

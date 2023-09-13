@@ -1,0 +1,89 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Gestion cadeaux{% endblock %}
+
+{% block body %}
+    <div class="admin-page">
+        <h1 class="admin-header">Gestion cadeaux</h1>
+
+        <form action="{{ path('back_app_gift_index') }}" class="form-select-gift" method="post">
+            <label class="select-label"  for="userSelect">Selectionner un utilisateur:</label>
+            <select id="userSelect" class="select-gift" name="selectedUserId">
+                <option value="" selected disabled>Selectionner un utilisateur</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.nom }} {{ user.prenom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="userForm">Submit</button>
+        </form>
+
+        {% if list_gifts is defined %}
+            <form action="{{ path('back_app_gift_index') }}" class="form-select-gift" method="post">
+                <label class="select-label" for="userSelect">Selectionner une liste:</label>
+                <select id="listSelect" class="select-gift" name="selectedListId">
+                    <option value="" selected disabled>Sélectionner une liste</option>
+                    {% if listSelected is empty %}
+                        {% for list_gift in list_gifts %}
+                        <option value="{{ list_gift.id }}">{{ list_gift.title }}</option>
+                        {% endfor %}
+                    
+                    {% else %}
+
+                        {% for list_gift in list_gifts %}
+                            <option value="{{ list_gift.id }}" {% if list_gift.id == listSelected.id %}selected{% endif %}>{{ list_gift.title }}</option>
+                        {% endfor %}
+
+                    {% endif %}
+                </select>
+                <button type="submit" name="listForm">Submit</button>
+            </form>
+        {% endif %}
+
+        {% if gifts is defined and gifts|length > 0 %}
+            <div class="container-list-owner">
+                <p>Cadeaux de la liste {{ listSelected.title }}</p>
+            </div>
+
+            <a href="{{ path('back_app_gift_new', {'id': listSelected.id}) }}" class="create-button">Créer un nouveau cadeau</a>
+        {% endif %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="opacity: 0%;">Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Lien d'achat</th>
+                    <th>Crée le</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if gifts is defined and gifts|length > 0 %}
+                {% for gift in gifts %}
+                    <tr>
+                        {% if vich_uploader_asset(gift, 'imageFile') is null %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" <img src="{{ asset('images/default/giftDefault.jpg') }}"></td>
+                        {% else %}
+                            <td style="width: 15%;"><img style="max-width: 100%;" src="{{ vich_uploader_asset(gift, 'imageFile') }}"></td>
+                        {% endif %}
+                        <td>{{ gift.name }}</td>
+                        <td>{{ gift.price }}</td>
+                        <td>{{ gift.urlPurchase }}</td>
+                        <td>{{ gift.createdAt ? gift.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>
+                            <a href="{{ path('back_app_gift_show', {'id': gift.id}) }}">Détails</a>
+                            <a href="{{ path('back_app_gift_edit', {'id': gift.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">Aucun cadeau trouvé</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
